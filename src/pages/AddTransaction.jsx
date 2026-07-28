@@ -1,4 +1,3 @@
-
 export default function AddTransaction() {
   return (
     <div className="page">
@@ -9,5 +8,3 @@ export default function AddTransaction() {
     </div>
   );
 }
-
-export default AddTransaction;
