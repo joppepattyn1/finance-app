@@ -1,10 +1,38 @@
+/* ===========================
+   THEME VARIABLES (gedeeld)
+   =========================== */
+
+:root {
+  --bg: #f7f7fb;
+  --card-bg: #ffffff;
+  --border: #ececf2;
+  --text-primary: #1a1a1a;
+  --text-secondary: #7a7a85;
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0px 6px 30px rgba(0, 0, 0, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --accent: #8b9cf7;      /* pastel indigo - primair */
+  --accent-hover: #7688f0;
+  --accent-blue: #93c5fd; /* pastel blauw - secundair */
+  --accent-blue-hover: #7fb3f7;
+
+  --pos: #4fb782;   /* pastel groen */
+  --pos-bg: #e8f9ee;
+  --neg: #e88a8a;   /* pastel rood */
+  --neg-bg: #fdecec;
+}
+
 /* ===== PAGE WRAPPER ===== */
 .add-page {
   padding: 24px;
   max-width: 480px;
   margin: 0 auto;
-  font-family: system-ui, sans-serif;
-  color: #222;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg);
 }
 
 /* ===== INLINE AMOUNT WRAPPER ===== */
@@ -26,7 +54,7 @@
   font-size: 56px;
   font-weight: 700;
   line-height: 1;
-  color: #111; /* licht thema */
+  color: var(--text-primary);
 }
 
 .amount-euro {
@@ -34,7 +62,7 @@
   font-weight: 500;
   margin-left: 6px;
   margin-bottom: 8px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* ===== INLINE AMOUNT INPUT ===== */
@@ -47,7 +75,7 @@
   border: none;
   outline: none;
   background: transparent;
-  color: #111;
+  color: var(--text-primary);
 }
 
 /* ===== TYPE TOGGLE ===== */
@@ -61,37 +89,39 @@
 .type-toggle button {
   padding: 10px 22px;
   border-radius: 20px;
-  border: 1px solid #ccc;
-  background: #f7f7f7;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   cursor: pointer;
   font-size: 15px;
   transition: all 0.2s ease;
-  color: #111;
+  color: var(--text-primary);
 }
 
 .type-toggle button.active {
-  background: #0084ff;
+  background: var(--accent);
   color: white;
-  border-color: #0084ff;
+  border-color: var(--accent);
 }
 
 /* ===== CATEGORY BUTTON ===== */
 .category-btn {
   width: 100%;
   padding: 16px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
   font-size: 16px;
   text-align: left;
   cursor: pointer;
   margin-bottom: 20px;
   transition: all 0.2s ease;
-  color: #111;
+  color: var(--text-primary);
 }
 
 .category-btn:hover {
-  background: #f3f3f3;
+  background: #fafafd;
+  border-color: var(--accent);
 }
 
 /* ===== BOTTOM SHEET ===== */
@@ -101,7 +131,7 @@
   right: 0;
   bottom: 0;
   height: 45%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(248, 242, 242, 0.993);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -109,13 +139,14 @@
 }
 
 .sheet-inner {
-  background: #fff;
+  background: var(--card-bg);
   width: 100%;
   max-width: 480px;
   padding: 20px;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-modal);
   animation: slideUp 0.25s ease;
-  color: #111;
+  color: var(--text-primary);
 }
 
 @keyframes slideUp {
@@ -124,26 +155,26 @@
 }
 
 @keyframes fadeIn {
-  from { background: rgba(0,0,0,0); }
-  to { background: rgba(0,0,0,0.3); }
+  from { background: rgba(0, 0, 0, 0); }
+  to { background: rgba(0, 0, 0, 0.3); }
 }
 
 .category-option {
   width: 100%;
   padding: 14px;
   margin-bottom: 10px;
-  background: #fafafa;
+  background: var(--bg);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 16px;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease;
-  color: #111;
+  transition: background 0.2s ease, color 0.2s ease;
+  color: var(--text-primary);
 }
 
 .category-option:hover {
-  background: #0084ff;
+  background: var(--accent);
   color: white;
 }
 
@@ -151,12 +182,12 @@
   width: 100%;
   padding: 14px;
   margin-top: 10px;
-  background: #ddd;
+  background: var(--border);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 16px;
   cursor: pointer;
-  color: #111;
+  color: var(--text-primary);
 }
 
 /* ===== NOTE INPUT ===== */
@@ -164,12 +195,13 @@
   width: 100%;
   min-height: 80px;
   padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   resize: none;
   font-size: 15px;
   margin-bottom: 20px;
-  color: #111;
+  color: var(--text-primary);
 }
 
 /* ===== DATE INPUT ===== */
@@ -177,24 +209,25 @@
   font-size: 15px;
   margin-bottom: 6px;
   display: block;
-  color: #444;
+  color: var(--text-secondary);
 }
 
 .date-input {
   width: 100%;
   padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   font-size: 16px;
   margin-bottom: 24px;
-  color: #111;
+  color: var(--text-primary);
 }
 
 /* ===== SAVE BUTTON ===== */
 .save-btn {
   width: 100%;
   padding: 16px;
-  background: #0084ff;
+  background: var(--accent);
   color: white;
   border: none;
   border-radius: 14px;
@@ -205,5 +238,5 @@
 }
 
 .save-btn:hover {
-  background: #006fe0;
+  background: var(--accent-hover);
 }

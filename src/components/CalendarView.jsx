@@ -1,29 +1,55 @@
+import { useState } from "react";
 import "../styles/calendar.css";
 
-export default function CalendarView({ days, onSelectDay }) {
-  return (
-    <div className="calendar">
-      {days.map((d) => (
-        <button
-          key={d.day}
-          className="calendar-day"
-          onClick={() => onSelectDay(d.day)}   // ⭐ correcte dag doorgeven
-        >
-          <span className="calendar-day-number">{d.day}</span>
+export default function CalendarView() {
+  const today = new Date();
 
-          <span
-            className={
-              d.total > 0
-                ? "calendar-day-total pos"
-                : d.total < 0
-                ? "calendar-day-total neg"
-                : "calendar-day-total zero"
-            }
-          >
-            € {d.total}
-          </span>
-        </button>
-      ))}
+  const [month, setMonth] = useState(today.getMonth());
+  const [year, setYear] = useState(today.getFullYear());
+
+  const months = [
+    "Januari", "Februari", "Maart", "April", "Mei", "Juni",
+    "Juli", "Augustus", "September", "Oktober", "November", "December"
+  ];
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  function prevMonth() {
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  }
+
+  function nextMonth() {
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
+  }
+
+  return (
+    <div className="calendar-wrapper">
+      {/* HEADER */}
+      <div className="calendar-header">
+        <button className="cal-btn" onClick={prevMonth}>◀</button>
+        <h2>{months[month]} {year}</h2>
+        <button className="cal-btn" onClick={nextMonth}>▶</button>
+      </div>
+
+      {/* GRID */}
+      <div className="calendar">
+        {Array.from({ length: daysInMonth }, (_, i) => (
+          <div key={i} className="calendar-day">
+            <span className="calendar-day-number">{i + 1}</span>
+            <span className="calendar-day-total zero">€0</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

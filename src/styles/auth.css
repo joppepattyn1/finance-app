@@ -1,5 +1,33 @@
+/* ===========================
+   THEME VARIABLES (gedeeld)
+   =========================== */
+
+:root {
+  --bg: #f7f7fb;
+  --card-bg: #ffffff;
+  --border: #ececf2;
+  --text-primary: #1a1a1a;
+  --text-secondary: #7a7a85;
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0px 6px 30px rgba(0, 0, 0, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --accent: #8b9cf7;      /* pastel indigo - primair */
+  --accent-hover: #7688f0;
+  --accent-blue: #93c5fd; /* pastel blauw - secundair */
+  --accent-blue-hover: #7fb3f7;
+  --accent-light: #b7c3fb; /* lichtere variant voor gradients */
+
+  --pos: #4fb782;   /* pastel groen */
+  --pos-bg: #e8f9ee;
+  --neg: #e88a8a;   /* pastel rood */
+  --neg-bg: #fdecec;
+}
+
 .auth-page {
-  background-color: #0D0D0F;
+  background-color: var(--bg);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -8,16 +36,17 @@
 }
 
 .auth-card {
-  background-color: #16161A;
+  background-color: var(--card-bg);
   width: 100%;
   max-width: 380px;
   padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 40px rgba(0,0,0,0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  border: 1px solid var(--border);
 }
 
 .auth-title {
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 25px;
@@ -26,35 +55,40 @@
 
 .auth-input {
   width: 100%;
-  background-color: #1F1F25;
-  border: none;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
   padding: 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-bottom: 14px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-size: 16px;
 }
 
 .auth-button {
   width: 100%;
-  background: linear-gradient(135deg, #6C63FF, #8A7CFF);
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
   border: none;
   padding: 16px;
-  border-radius: 12px;
-  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  color: #ffffff;
   font-size: 18px;
   font-weight: 600;
   margin-top: 10px;
   cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.auth-button:hover {
+  opacity: 0.9;
 }
 
 .auth-link {
   margin-top: 20px;
   text-align: center;
-  color: #A1A1AA;
+  color: var(--text-secondary);
 }
 
 .auth-link a {
-  color: #6C63FF;
+  color: var(--accent);
   font-weight: 600;
 }

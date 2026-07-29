@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import { useNavigate } from "react-router-dom";
 import "../styles/profile.css";
 
 export default function Profile() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    loadUser();
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
   }, []);
 
-  async function loadUser() {
-    const { data } = await supabase.auth.getUser();
-    setUser(data.user);
+  if (user === undefined) return null;
+
+  if (user === null) {
+    navigate("/login");
+    return null;
   }
 
   async function logout() {
     await supabase.auth.signOut();
-    window.location.href = "/login";
+    navigate("/login");
   }
-
-  if (!user) return null;
 
   return (
     <div className="profile-page">

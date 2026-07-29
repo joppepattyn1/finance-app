@@ -1,40 +1,138 @@
-/* ====== CALENDAR CONTAINER ====== */
+/* ===========================
+   THEME VARIABLES (gedeeld)
+   =========================== */
+
+:root {
+  --bg: #f7f7fb;
+  --card-bg: #ffffff;
+  --border: #ececf2;
+  --text-primary: #1a1a1a;
+  --text-secondary: #7a7a85;
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0px 6px 30px rgba(0, 0, 0, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --accent: #8b9cf7;
+  --accent-hover: #7688f0;
+  --accent-blue: #93c5fd;
+  --accent-blue-hover: #7fb3f7;
+
+  --pos: #4fb782;
+  --pos-bg: #e8f9ee;
+  --neg: #e88a8a;
+  --neg-bg: #fdecec;
+  --zero: #a3a3ab;
+  --zero-bg: #f0f0f4;
+}
+
+/* ===========================
+   WRAPPER
+   =========================== */
+
+.calendar-wrapper {
+  background: var(--card-bg);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 20px auto;
+}
+
+/* ===========================
+   HEADER (maand + jaar + pijltjes)
+   =========================== */
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 4px 0;
+}
+
+.calendar-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cal-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.cal-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ===========================
+   CALENDAR GRID
+   =========================== */
+
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 12px;
   padding: 20px;
-  background: #f7f9fc;
-  border-radius: 12px;
+  background: var(--bg);
+  border-radius: var(--radius-md);
 }
 
-/* ====== DAY BUTTON ====== */
+/* ===========================
+   DAY BUTTON
+   =========================== */
+
 .calendar-day {
-  background: white;
-  border: none;
-  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 14px 10px;
   cursor: pointer;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .calendar-day:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
 }
 
-/* ====== DAY NUMBER ====== */
+/* ===========================
+   DAY NUMBER
+   =========================== */
+
 .calendar-day-number {
   display: block;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #333;
+  color: var(--text-primary);
 }
 
-/* ====== TOTAL AMOUNT ====== */
+/* ===========================
+   TOTAL AMOUNT BADGE
+   =========================== */
+
 .calendar-day-total {
   display: inline-block;
   font-size: 14px;
@@ -43,25 +141,25 @@
   border-radius: 6px;
 }
 
-/* POSITIVE */
 .calendar-day-total.pos {
-  background: #e8f9e8;
-  color: #2e8b57;
+  background: var(--pos-bg);
+  color: var(--pos);
 }
 
-/* NEGATIVE */
 .calendar-day-total.neg {
-  background: #fdeaea;
-  color: #c0392b;
+  background: var(--neg-bg);
+  color: var(--neg);
 }
 
-/* ZERO */
 .calendar-day-total.zero {
-  background: #f0f0f0;
-  color: #777;
+  background: var(--zero-bg);
+  color: var(--zero);
 }
 
-/* ====== RESPONSIVE ====== */
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
 @media (max-width: 600px) {
   .calendar {
     grid-template-columns: repeat(4, 1fr);

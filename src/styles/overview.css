@@ -1,14 +1,41 @@
 /* ===========================
+   THEME VARIABLES (gedeeld)
+   =========================== */
+
+:root {
+  --bg: #f7f7fb;
+  --card-bg: #ffffff;
+  --border: #ececf2;
+  --text-primary: #1a1a1a;
+  --text-secondary: #7a7a85;
+  --shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0px 6px 30px rgba(0, 0, 0, 0.12);
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --accent: #8b9cf7;      /* pastel indigo - primair */
+  --accent-hover: #7688f0;
+  --accent-blue: #93c5fd; /* pastel blauw - secundair (close-btn) */
+  --accent-blue-hover: #7fb3f7;
+
+  --pos: #4fb782;   /* pastel groen */
+  --pos-bg: #e8f9ee;
+  --neg: #e88a8a;   /* pastel rood */
+  --neg-bg: #fdecec;
+}
+
+/* ===========================
    OVERVIEW PAGE (LIGHT THEME)
    =========================== */
 
 .overview-page {
   padding: 20px;
   padding-bottom: 100px; /* ruimte voor navbar */
-  background-color: #f7f7f9;
+  background-color: var(--bg);
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 /* ===========================
@@ -19,7 +46,7 @@
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 15px;
-  color: #1a1a1a;
+  color: var(--text-primary);
   text-transform: capitalize;
 }
 
@@ -28,12 +55,12 @@
    =========================== */
 
 .chart-card {
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
   margin-bottom: 25px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
 }
 
 /* ===========================
@@ -52,18 +79,19 @@
 }
 
 .calendar-day {
-  background-color: #ffffff;
-  border-radius: 10px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-sm);
   padding: 8px;
   text-align: center;
   cursor: pointer;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.04);
   transition: all 0.15s ease;
 }
 
 .calendar-day:hover {
   transform: scale(1.05);
+  border-color: var(--accent);
 }
 
 .calendar-day-number {
@@ -77,11 +105,11 @@
 }
 
 .pos {
-  color: #22c55e; /* groen */
+  color: var(--pos);
 }
 
 .neg {
-  color: #ef4444; /* rood */
+  color: var(--neg);
 }
 
 /* ===========================
@@ -89,18 +117,18 @@
    =========================== */
 
 .recent {
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
-  border: 1px solid #e5e5e5;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .recent-item {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--border);
 }
 
 .recent-item:last-child {
@@ -110,11 +138,11 @@
 .recent-title {
   font-size: 16px;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 .recent-empty {
-  color: #777;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -128,7 +156,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,29 +164,29 @@
 }
 
 .modal-card {
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   width: 100%;
   max-width: 400px;
   padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0px 6px 30px rgba(0,0,0,0.15);
-  border: 1px solid #e5e5e5;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  border: 1px solid var(--border);
 }
 
 .modal-title {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #1a1a1a;
+  color: var(--text-primary);
 }
 
 /* Add transaction button */
 .add-btn {
   width: 100%;
-  background-color: #10b981;
+  background-color: var(--accent);
   border: none;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -168,7 +196,7 @@
 }
 
 .add-btn:hover {
-  background-color: #0d9a6f;
+  background-color: var(--accent-hover);
 }
 
 /* Modal items */
@@ -176,7 +204,7 @@
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-item:last-child {
@@ -190,12 +218,12 @@
 
 .modal-item-date {
   font-size: 12px;
-  color: #777;
+  color: var(--text-secondary);
 }
 
 .modal-empty {
   text-align: center;
-  color: #777;
+  color: var(--text-secondary);
   margin-bottom: 20px;
 }
 
@@ -206,16 +234,16 @@
 
 .swipe:active {
   transform: translateX(-40px);
-  background-color: #fee2e2;
+  background-color: var(--neg-bg);
 }
 
 /* Close button */
 .close-btn {
   width: 100%;
-  background-color: #3b82f6;
+  background-color: var(--accent-blue);
   border: none;
   padding: 14px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -225,7 +253,7 @@
 }
 
 .close-btn:hover {
-  background-color: #2563eb;
+  background-color: var(--accent-blue-hover);
 }
 
 .modal-item-right {
@@ -235,7 +263,7 @@
 }
 
 .delete-btn {
-  background-color: #ef4444;
+  background-color: var(--neg);
   border: none;
   color: white;
   font-size: 16px;
@@ -246,5 +274,5 @@
 }
 
 .delete-btn:hover {
-  background-color: #dc2626;
+  background-color: #dc6b6b;
 }
