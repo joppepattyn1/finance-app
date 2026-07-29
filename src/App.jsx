@@ -1,28 +1,36 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation
+} from "react-router-dom";
+
 import Overview from "./pages/Overview";
 import AddTransaction from "./pages/AddTransaction";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import NavBar from "./components/NavBar";
+
 import "./styles/theme.css";
 
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 
-// AuthGuard die NOOIT een refresh-loop veroorzaakt
+// AuthGuard die login/register NIET blokkeert
 function AuthGuard({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(undefined);
 
   useEffect(() => {
-    // Luistert naar login / logout / token refresh
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user || null);
       }
     );
 
-    // Eerste load
     supabase.auth.getUser().then(({ data }) => {
       setUser(data.user);
     });
@@ -30,10 +38,14 @@ function AuthGuard({ children }) {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  // Nog aan het laden → niets doen
   if (user === undefined) return null;
 
-  // Niet ingelogd → naar login
+  // Login & Register mogen altijd
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return children;
+  }
+
+  // Niet ingelogd → redirect naar login
   if (user === null) {
     navigate("/login", { replace: true });
     return null;
@@ -45,13 +57,32 @@ function AuthGuard({ children }) {
 export default function App() {
   return (
     <Router>
-      <div className="app-container">
+      <InnerApp />
+    </Router>
+  );
+}
+
+// InnerApp zit BINNEN Router → geen crash
+function InnerApp() {
+  const location = useLocation();
+
+  // NavBar verbergen op login/register
+  const hideNav =
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
+  return (
+    <div className="app-container">
+
+      {/* JIJ maakt auth-wrapper mooi gecentreerd in CSS */}
+      <div className={hideNav ? "auth-wrapper" : ""}>
 
         <Routes>
-          {/* LOGIN MAG ALTIJD */}
+          {/* Open routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-          {/* BEVEILIGDE PAGINA'S */}
+          {/* Beveiligde routes */}
           <Route
             path="/"
             element={
@@ -89,12 +120,14 @@ export default function App() {
           />
         </Routes>
 
-        {/* NAVBAR ALLEEN ALS JE INGLOGD BENT */}
-        <AuthGuard>
-          <NavBar />
-        </AuthGuard>
+        {/* NavBar alleen tonen als user NIET op login/register zit */}
+        {!hideNav && (
+          <AuthGuard>
+            <NavBar />
+          </AuthGuard>
+        )}
 
       </div>
-    </Router>
+    </div>
   );
 }

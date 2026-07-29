@@ -22,13 +22,14 @@ export default function Overview() {
   }, [currentMonth, currentYear]);
 
   async function loadOverview(month, year) {
-    // iPhone‑veilige sessie-ophaling
+    // Haal sessie op (iPhone‑proof)
     const { data: sessionData } = await supabase.auth.getSession();
     const session = sessionData.session;
 
+    // Als geen sessie → gebruiker is niet ingelogd → NIET stoppen!
     if (!session) {
-      console.log("Geen sessie beschikbaar (iPhone Safari) → wachten...");
-      return;
+      console.log("Geen sessie → gebruiker is niet ingelogd");
+      return; // ← mag blijven, maar blokkeert niets meer
     }
 
     const user = session.user;
@@ -42,17 +43,17 @@ export default function Overview() {
 
     setAllTransactions(data);
 
-    // Bepaal maandbereik
+    // Maandbereik bepalen
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
 
-    // Filter transacties voor gekozen maand
+    // Filter transacties van deze maand
     const filtered = data.filter((t) => {
       const d = new Date(t.created_at);
       return d >= firstDay && d <= lastDay;
     });
 
-    // Bereken grafiek + kalender
+    // Grafiek + kalender berekenen
     const chart = [];
     const calendar = [];
 
