@@ -20,7 +20,6 @@ export default function CalendarView({ dailyTotals = {}, onDayClick, onMonthChan
 
     setMonth(newMonth);
     setYear(newYear);
-
     onMonthChange?.(newMonth, newYear);
   }
 
@@ -30,41 +29,46 @@ export default function CalendarView({ dailyTotals = {}, onDayClick, onMonthChan
 
     setMonth(newMonth);
     setYear(newYear);
-
     onMonthChange?.(newMonth, newYear);
   }
 
   return (
     <div className="calendar-wrapper">
-      <div className="calendar-header">
-        <button className="cal-btn" onClick={prevMonth}>◀</button>
-        <h2>{months[month]} {year}</h2>
-        <button className="cal-btn" onClick={nextMonth}>▶</button>
-      </div>
+      <div className="calendar-container">
 
-      <div className="calendar">
-        {Array.from({ length: daysInMonth }, (_, i) => {
-          const day = i + 1;
-          const amount = dailyTotals[day] ?? 0;
+        {/* Header */}
+        <div className="calendar-header">
+          <button className="cal-btn" onClick={prevMonth}>◀</button>
+          <h2 className="calendar-title">{months[month]} {year}</h2>
+          <button className="cal-btn" onClick={nextMonth}>▶</button>
+        </div>
 
-          const amountClass =
-            amount > 0 ? "pos" :
-            amount < 0 ? "neg" :
-            "zero";
+        {/* Days */}
+        <div className="calendar-grid">
+          {Array.from({ length: daysInMonth }, (_, i) => {
+            const day = i + 1;
+            const amount = dailyTotals[day] ?? 0;
 
-          return (
-            <div
-              key={day}
-              className="calendar-day"
-              onClick={() => onDayClick?.(day)}
-            >
-              <span className="calendar-day-number">{day}</span>
-              <span className={`calendar-day-total ${amountClass}`}>
-                €{amount}
-              </span>
-            </div>
-          );
-        })}
+            const amountClass =
+              amount > 0 ? "pos" :
+              amount < 0 ? "neg" :
+              "zero";
+
+            return (
+              <div
+                key={day}
+                className="calendar-day"
+                onClick={() => onDayClick?.(day)}
+              >
+                <span className="calendar-day-number">{day}</span>
+                <span className={`calendar-day-total ${amountClass}`}>
+                  €{amount}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </div>
   );
