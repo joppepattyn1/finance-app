@@ -5,37 +5,55 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  CartesianGrid
 } from "recharts";
+import "../styles/overview.css";
 
 export default function MonthlySummaryChart({ data }) {
   return (
     <div className="chart-card">
-      <h2 className="section-title">Maandoverzicht</h2>
+      <h2 className="chart-title">Maandoverzicht</h2>
 
-      <ResponsiveContainer width="100%" height={220}>
+      <ResponsiveContainer width="100%" height={260}>
         <LineChart data={data}>
-          <XAxis dataKey="day" stroke="#A1A1AA" />
-          <YAxis stroke="#A1A1AA" />
+          <CartesianGrid stroke="#ececf2" strokeDasharray="4 4" />
+
+          <XAxis
+            dataKey="day"
+            tick={{ fill: "#7a7a85", fontSize: 12 }}
+            stroke="#ececf2"
+          />
+
+          <YAxis
+            tick={{ fill: "#7a7a85", fontSize: 12 }}
+            stroke="#ececf2"
+          />
+
           <Tooltip
             contentStyle={{
-              backgroundColor: "#16161A",
+              background: "#ffffff",
               borderRadius: "10px",
-              border: "1px solid #2A2A2E",
+              border: "1px solid #ececf2",
+              boxShadow: "0px 4px 20px rgba(0,0,0,0.06)"
             }}
           />
+
           <Line
             type="monotone"
             dataKey="income"
-            stroke="#4ADE80"
+            stroke="#4fb782"
             strokeWidth={3}
             dot={false}
+            animationDuration={800}
           />
+
           <Line
             type="monotone"
             dataKey="expense"
-            stroke="#F87171"
+            stroke="#e88a8a"
             strokeWidth={3}
             dot={false}
+            animationDuration={800}
           />
         </LineChart>
       </ResponsiveContainer>

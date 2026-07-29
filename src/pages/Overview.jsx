@@ -14,15 +14,17 @@ export default function Overview() {
   const [selectedDay, setSelectedDay] = useState(null);
   const [dayTransactions, setDayTransactions] = useState([]);
 
-  useEffect(() => {
-    loadOverview();
-  }, []);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-  async function loadOverview() {
+  useEffect(() => {
+    loadOverview(currentMonth, currentYear);
+  }, [currentMonth, currentYear]);
+
+  async function loadOverview(month, year) {
     const { data: userData } = await supabase.auth.getUser();
     const user = userData.user;
 
-    // ⭐ FIX: created_at als lokale timestamp ophalen
     const { data } = await supabase
       .from("transactions")
       .select("*, created_at::timestamp")
@@ -31,18 +33,24 @@ export default function Overview() {
 
     setAllTransactions(data);
 
-    const now = new Date();
-    const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+    // Bepaal maandbereik
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
 
-    const filtered = data.filter((t) => new Date(t.created_at) >= firstDay);
+    // Filter transacties voor gekozen maand
+    const filtered = data.filter((t) => {
+      const d = new Date(t.created_at);
+      return d >= firstDay && d <= lastDay;
+    });
 
+    // Bereken grafiek + kalender
     const chart = [];
     const calendar = [];
 
-    for (let day = 1; day <= 31; day++) {
+    for (let day = 1; day <= lastDay.getDate(); day++) {
       const dayData = filtered.filter((t) => {
-        const localDate = new Date(t.created_at);
-        return localDate.getDate() === day;
+        const d = new Date(t.created_at);
+        return d.getDate() === day;
       });
 
       const income = dayData
@@ -59,9 +67,8 @@ export default function Overview() {
 
     setChartData(chart);
     setCalendarData(calendar);
-    setRecentChanges(filtered.slice(0, 5));
+    setRecentChanges(filtered);
 
-    // ⭐ Modal live updaten na delete
     if (selectedDay !== null) {
       openDay(selectedDay);
     }
@@ -69,8 +76,12 @@ export default function Overview() {
 
   function openDay(day) {
     const dayData = allTransactions.filter((t) => {
-      const localDate = new Date(t.created_at);
-      return localDate.getDate() === day;
+      const d = new Date(t.created_at);
+      return (
+        d.getDate() === day &&
+        d.getMonth() === currentMonth &&
+        d.getFullYear() === currentYear
+      );
     });
 
     setDayTransactions(dayData);
@@ -80,7 +91,16 @@ export default function Overview() {
   return (
     <div className="overview-page">
       <MonthlySummaryChart data={chartData} />
-      <CalendarView days={calendarData} onSelectDay={openDay} />
+
+      <CalendarView
+        dailyTotals={Object.fromEntries(calendarData.map(d => [d.day, d.total]))}
+        onDayClick={openDay}
+        onMonthChange={(month, year) => {
+          setCurrentMonth(month);
+          setCurrentYear(year);
+        }}
+      />
+
       <RecentChangesList changes={recentChanges} />
 
       {selectedDay && (
@@ -88,7 +108,7 @@ export default function Overview() {
           day={selectedDay}
           transactions={dayTransactions}
           onClose={() => setSelectedDay(null)}
-          onDelete={() => loadOverview()}
+          onDelete={() => loadOverview(currentMonth, currentYear)}
         />
       )}
     </div>
