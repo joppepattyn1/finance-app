@@ -22,9 +22,18 @@ export default function Overview() {
   }, [currentMonth, currentYear]);
 
   async function loadOverview(month, year) {
-    const { data: userData } = await supabase.auth.getUser();
-    const user = userData.user;
+    // iPhone‑veilige sessie-ophaling
+    const { data: sessionData } = await supabase.auth.getSession();
+    const session = sessionData.session;
 
+    if (!session) {
+      console.log("Geen sessie beschikbaar (iPhone Safari) → wachten...");
+      return;
+    }
+
+    const user = session.user;
+
+    // Haal transacties op
     const { data } = await supabase
       .from("transactions")
       .select("*, created_at::timestamp")
