@@ -1,0 +1,250 @@
+/* ===========================
+   OVERVIEW PAGE (LIGHT THEME)
+   =========================== */
+
+.overview-page {
+  padding: 20px;
+  padding-bottom: 100px; /* ruimte voor navbar */
+  background-color: #f7f7f9;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+/* ===========================
+   TITLES
+   =========================== */
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+  text-transform: capitalize;
+}
+
+/* ===========================
+   CHART CARD
+   =========================== */
+
+.chart-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 25px;
+  border: 1px solid #e5e5e5;
+}
+
+/* ===========================
+   CALENDAR
+   =========================== */
+
+.calendar {
+  margin-bottom: 25px;
+}
+
+/* Compacte mobiele kalender */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-day {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.05);
+  transition: all 0.15s ease;
+}
+
+.calendar-day:hover {
+  transform: scale(1.05);
+}
+
+.calendar-day-number {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-day-amount {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.pos {
+  color: #22c55e; /* groen */
+}
+
+.neg {
+  color: #ef4444; /* rood */
+}
+
+/* ===========================
+   RECENT CHANGES
+   =========================== */
+
+.recent {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.recent-item:last-child {
+  border-bottom: none;
+}
+
+.recent-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.recent-empty {
+  color: #777;
+  font-size: 14px;
+}
+
+/* ===========================
+   MODAL
+   =========================== */
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 30px rgba(0,0,0,0.15);
+  border: 1px solid #e5e5e5;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+/* Add transaction button */
+.add-btn {
+  width: 100%;
+  background-color: #10b981;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.add-btn:hover {
+  background-color: #0d9a6f;
+}
+
+/* Modal items */
+.modal-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-item:last-child {
+  border-bottom: none;
+}
+
+.modal-item-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.modal-item-date {
+  font-size: 12px;
+  color: #777;
+}
+
+.modal-empty {
+  text-align: center;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Swipe delete */
+.swipe {
+  transition: transform 0.2s ease;
+}
+
+.swipe:active {
+  transform: translateX(-40px);
+  background-color: #fee2e2;
+}
+
+/* Close button */
+.close-btn {
+  width: 100%;
+  background-color: #3b82f6;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.close-btn:hover {
+  background-color: #2563eb;
+}
+
+.modal-item-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}

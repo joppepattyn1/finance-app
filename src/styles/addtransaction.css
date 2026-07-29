@@ -1,0 +1,209 @@
+/* ===== PAGE WRAPPER ===== */
+.add-page {
+  padding: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+/* ===== INLINE AMOUNT WRAPPER ===== */
+.amount-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* ===== AMOUNT DISPLAY ===== */
+.amount-display {
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.amount-big {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  color: #111; /* licht thema */
+}
+
+.amount-euro {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 6px;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+/* ===== INLINE AMOUNT INPUT ===== */
+.amount-inline-input {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  width: 160px;
+  text-align: right;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #111;
+}
+
+/* ===== TYPE TOGGLE ===== */
+.type-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.type-toggle button {
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  color: #111;
+}
+
+.type-toggle button.active {
+  background: #0084ff;
+  color: white;
+  border-color: #0084ff;
+}
+
+/* ===== CATEGORY BUTTON ===== */
+.category-btn {
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+  color: #111;
+}
+
+.category-btn:hover {
+  background: #f3f3f3;
+}
+
+/* ===== BOTTOM SHEET ===== */
+.category-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  animation: fadeIn 0.2s ease;
+}
+
+.sheet-inner {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  animation: slideUp 0.25s ease;
+  color: #111;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { background: rgba(0,0,0,0); }
+  to { background: rgba(0,0,0,0.3); }
+}
+
+.category-option {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: #fafafa;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  color: #111;
+}
+
+.category-option:hover {
+  background: #0084ff;
+  color: white;
+}
+
+.sheet-close {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: #ddd;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #111;
+}
+
+/* ===== NOTE INPUT ===== */
+.note-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  resize: none;
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+/* ===== DATE INPUT ===== */
+.date-label {
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: block;
+  color: #444;
+}
+
+.date-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+/* ===== SAVE BUTTON ===== */
+.save-btn {
+  width: 100%;
+  padding: 16px;
+  background: #0084ff;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.save-btn:hover {
+  background: #006fe0;
+}

@@ -1,66 +1,23 @@
-import { useState } from "react";
-import { supabase } from "./supabaseClient";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Overview from "./pages/Overview";   // ← nieuwe pagina importeren
+import AddTransaction from "./pages/AddTransaction";
+import Profile from "./pages/Profile";
+import NavBar from "./components/NavBar";
+import "./styles/theme.css";
 
 export default function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
-
-  async function signUp() {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password
-    });
-
-    if (error) {
-      alert(error.message);
-    } else {
-      alert("Account created! Check your email to confirm.");
-    }
-  }
-
-  async function signIn() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      alert(error.message);
-    } else {
-      setUser(data.user);
-    }
-  }
-
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Finance App</h1>
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<Overview />} />        {/* ← nieuwe hoofdpagina */}
+          <Route path="/overview" element={<Overview />} />{/* ← nieuwe route */}
+          <Route path="/add" element={<AddTransaction />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
 
-      {!user && (
-        <>
-          <input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <input
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button onClick={signUp}>Create Account</button>
-          <button onClick={signIn}>Login</button>
-        </>
-      )}
-
-      {user && (
-        <div>
-          <h2>Welcome, {user.email}</h2>
-        </div>
-      )}
-    </div>
+        <NavBar />
+      </div>
+    </Router>
   );
 }
