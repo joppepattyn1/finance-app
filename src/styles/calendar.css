@@ -27,19 +27,7 @@
   --zero-bg: #f0f0f4;
 }
 
-/* ===========================
-   WRAPPER (gecentreerd)
-   =========================== */
 
-.calendar-wrapper {
-  background: var(--card-bg);
-  padding: 14px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
-  width: 100%;
-  max-width: 380px; /* ← FIX: was 340px */
-  margin: 0 auto 20px auto;
-}
 
 
 .calendar-container {
@@ -132,9 +120,9 @@
 
 .calendar-day-number {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 1px;
   color: var(--text-primary);
 }
 
@@ -144,9 +132,9 @@
 
 .calendar-day-total {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  padding: 4px 8px;
+  padding: 2px 6px;
   border-radius: 6px;
 }
 
@@ -173,4 +161,21 @@
   .calendar-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.calendar-day {
+  aspect-ratio: 1 / 1; /* vierkant */
+  height: 60px;        /* vaste hoogte voor consistentie */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  padding: 0; /* padding weg → perfecte gelijke vakjes */
 }

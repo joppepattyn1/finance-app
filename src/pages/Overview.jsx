@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+
 import MonthlySummaryChart from "../components/MonthlySummaryChart";
 import CalendarView from "../components/CalendarView";
 import DayDetailsModal from "../components/DayDetailsModal";
 import RecentChangesList from "../components/RecentChangesList";
+
 import "../styles/overview.css";
 
 export default function Overview() {
@@ -11,6 +13,7 @@ export default function Overview() {
   const [chartData, setChartData] = useState([]);
   const [calendarData, setCalendarData] = useState([]);
   const [recentChanges, setRecentChanges] = useState([]);
+
   const [selectedDay, setSelectedDay] = useState(null);
   const [dayTransactions, setDayTransactions] = useState([]);
 
@@ -22,19 +25,16 @@ export default function Overview() {
   }, [currentMonth, currentYear]);
 
   async function loadOverview(month, year) {
-    // Haal sessie op (iPhone‑proof)
     const { data: sessionData } = await supabase.auth.getSession();
     const session = sessionData.session;
 
-    // Als geen sessie → gebruiker is niet ingelogd → NIET stoppen!
     if (!session) {
       console.log("Geen sessie → gebruiker is niet ingelogd");
-      return; // ← mag blijven, maar blokkeert niets meer
+      return;
     }
 
     const user = session.user;
 
-    // Haal transacties op
     const { data } = await supabase
       .from("transactions")
       .select("*, created_at::timestamp")
@@ -43,17 +43,14 @@ export default function Overview() {
 
     setAllTransactions(data);
 
-    // Maandbereik bepalen
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
 
-    // Filter transacties van deze maand
     const filtered = data.filter((t) => {
       const d = new Date(t.created_at);
       return d >= firstDay && d <= lastDay;
     });
 
-    // Grafiek + kalender berekenen
     const chart = [];
     const calendar = [];
 
@@ -100,8 +97,11 @@ export default function Overview() {
 
   return (
     <div className="overview-page">
-      <MonthlySummaryChart data={chartData} />
 
+      {/* 1️⃣ Maandberekening bovenaan */}
+      <RecentChangesList changes={recentChanges} />
+
+      {/* 2️⃣ Kalender in het midden */}
       <CalendarView
         dailyTotals={Object.fromEntries(calendarData.map(d => [d.day, d.total]))}
         onDayClick={openDay}
@@ -111,8 +111,10 @@ export default function Overview() {
         }}
       />
 
-      <RecentChangesList changes={recentChanges} />
+      {/* 3️⃣ Grafiek helemaal onderaan */}
+      <MonthlySummaryChart data={chartData} />
 
+      {/* 4️⃣ Dagdetails modal */}
       {selectedDay && (
         <DayDetailsModal
           day={selectedDay}
@@ -121,6 +123,7 @@ export default function Overview() {
           onDelete={() => loadOverview(currentMonth, currentYear)}
         />
       )}
-    </div>
+
+   </div>
   );
 }

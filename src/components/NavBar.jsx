@@ -1,25 +1,24 @@
 import { NavLink } from "react-router-dom";
+import "../styles/navbar.css";
 
 export default function NavBar() {
   return (
-    <div className="navbar">
-      <NavLink to="/overview">
-        {({ isActive }) => (
-          <span className={`nav-icon ${isActive ? "active" : ""}`}>📊</span>
-        )}
-      </NavLink>
+    <div className="glass-nav-container">
+      <div className="glass-nav">
 
-      <NavLink to="/add">
-        {({ isActive }) => (
-          <span className={`nav-icon ${isActive ? "active" : ""}`}>➕</span>
-        )}
-      </NavLink>
+        <NavLink to="/overview" className="glass-item">
+          <span className="glass-icon">🏠</span>
+        </NavLink>
 
-      <NavLink to="/profile">
-        {({ isActive }) => (
-          <span className={`nav-icon ${isActive ? "active" : ""}`}>👤</span>
-        )}
-      </NavLink>
+        <NavLink to="/add" className="glass-item">
+          <span className="glass-icon">➕</span>
+        </NavLink>
+
+        <NavLink to="/profile" className="glass-item">
+          <span className="glass-icon">👤</span>
+        </NavLink>
+
+      </div>
     </div>
   );
 }

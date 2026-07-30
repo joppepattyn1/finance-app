@@ -1,0 +1,66 @@
+.glass-nav-container {
+  position: fixed;
+  bottom: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 200;
+}
+
+/* LIQUID GLASS EFFECT */
+.glass-nav {
+  display: flex;
+  gap: 40px;
+
+  padding: 14px 30px;
+  border-radius: 40px;
+
+  background: rgba(255, 255, 255, 0.35); /* lichte witte glaslaag */
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  /* KLEUR GLOW zoals op jouw foto */
+  box-shadow:
+    0 4px 20px rgba(139, 156, 247, 0.35),   /* paars-blauwe glow */
+    0 0 25px rgba(255, 255, 255, 0.6);      /* witte glas-glow */
+}
+
+.glass-item {
+  position: relative;
+  text-decoration: none;
+  color: #333;
+}
+
+.glass-icon {
+  font-size: 26px;
+  transition: 0.25s ease;
+}
+
+/* ACTIVE BUBBLE EFFECT */
+.glass-item.active .glass-icon {
+  color: #8b9cf7; /* jouw accentkleur */
+  transform: scale(1.25);
+}
+
+.glass-item.active::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+
+  background: rgba(139, 156, 247, 0.25); /* kleur bubble */
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 0 15px rgba(139, 156, 247, 0.4),
+    inset 0 0 10px rgba(255, 255, 255, 0.4);
+
+  z-index: -1;
+}
